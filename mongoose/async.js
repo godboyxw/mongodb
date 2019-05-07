@@ -16,7 +16,7 @@ var promise2 = function (x) {
     });
 }
 
-var promise3 = function (x,y) {
+var promise3 = function (x, y) {
     return new Promise(function (resolve, reject) {
         setTimeout(function () {
             // console.log("f3 ok!")
@@ -87,7 +87,7 @@ promise1().then(res1=>{
 //     }catch(err){
 //         console.log(err.message); //无法捕获错误,catch已经在Promise中使用了
 //     }
-    
+
 // }
 // makeRequest()
 
@@ -108,3 +108,42 @@ promise1().then(res1=>{
 
 
 
+/*
+var callAPromise = function () {
+    return new Promise(function (resolve, reject) {
+        setTimeout(function () {
+            resolve("callAPromise");
+        }, 1000)
+    });
+}
+
+const makeRequest = () => {
+    return callAPromise()  // TypeError: Cannot read property 'catch' of undefined
+    .then(() => callAPromise())
+    .then(() => callAPromise())
+    .then(() => callAPromise())
+    .then(() => callAPromise())
+    .then(() => {
+      throw new Error("oops");
+    })
+}
+makeRequest()
+.catch(err=>{
+    console.log(err); // Error: oops at callAPromise.then.then.then.then.then (F:\study\mongodb\mongoose\async.js:124:13)
+    console.log(err.message); //oops
+})
+
+const makeRequest = async () => { //因为async方法的结果也是一个promise，所以返回一个promise是等价的。故不需要return
+    await callAPromise()
+    await callAPromise()
+    await callAPromise()
+    await callAPromise()
+    await callAPromise()
+    throw new Error("oops");
+}
+
+makeRequest().catch(err=>{
+    console.log(err); //Error: oops at makeRequest (F:\study\mongodb\mongoose\async.js:141:11)
+    console.log(err.message); // oops
+})
+*/
